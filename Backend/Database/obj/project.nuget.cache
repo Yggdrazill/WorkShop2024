@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "/wcSQVUvJVivgl0C3F0TBniHYRMQX3VlgE0DgP+2FacthB/Ld6PxMAnKIzkwsX6+PlZ8gsxQUkJQ2DN+/Ruqsw==",
+  "dgSpecHash": "ehxCN+3PFeUd681ZMQxwLD2yNYLipgqjBZqjzJB7nDQDvsJyGfSzQOHRkJMPdkp0X1sEHo1L0vKC9pqIZ/rNsA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\anrm\\source\\repos\\TEst1112313\\Database\\Database.csproj",
+  "projectFilePath": "C:\\Users\\anrm\\source\\repos\\StudentWorkshop\\Backend\\Database\\Database.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\anrm\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\anrm\\.nuget\\packages\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",
