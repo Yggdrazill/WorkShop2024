@@ -1,29 +1,85 @@
-﻿using WebShop.DataTransferObjects;
+﻿using Database;
+using Database.Entities;
+using WebShop.DataTransferObjects;
 
 namespace WebShop.Repositories
 {
 	public class ItemRepository
 	{
+
+		private Context _dbContext;
+
 		public ItemRepository()
 		{
+			_dbContext = new Context();
 		}
 
-		public void CreateItem(Item Item)
+		public List<ItemDTO> GetItems()
 		{
-			
+			return _dbContext.Item.Select(x => new ItemDTO
+			{
+				Id = x.Id,
+				Cost = x.Cost,
+				Currency = x.Currency,
+				Name = x.Name,
+				ImageId = x.ImageId
+			}).ToList();
 		}
 
-
-		public void UpdateItem()
+		public ItemDTO GetItem(int id)
 		{
-
+			var entity = _dbContext.Item.First(x => x.Id == id);
+			return new ItemDTO
+			{
+				Id = entity.Id,
+				Cost = entity.Cost,
+				Currency = entity.Currency,
+				Name = entity.Name,
+				ImageId = entity.ImageId
+			};
 		}
-
-
-		public void DeleteItem()
+		public void CreateItem(ItemDTO dto)
 		{
+			var entity = new Item
+			{
+				Id = dto.Id,
+				Name = dto.Name,
+				Cost = dto.Cost,
+				Currency = dto.Currency,
+				ImageId = dto.ImageId,
+			};
 
+			_dbContext.Item.Add(entity);
+			_dbContext.SaveChanges();
 		}
+
+
+		public void UpdateItem(int id, ItemDTO dto)
+		{
+			var entity = _dbContext.Item.FirstOrDefault(x => x.Id == id);
+
+			if (entity == null)
+			{
+				throw new Exception($"No item exists with id: {id}");
+			}
+
+
+			entity.Name = dto.Name;
+			entity.Cost = dto.Cost;
+			entity.Currency = dto.Currency;
+			entity.ImageId = dto.ImageId;
+
+			_dbContext.SaveChanges();
+		}
+
+
+		public void DeleteItem(int id)
+		{
+			var entity = _dbContext.Item.FirstOrDefault(x => x.Id == id);
+			_dbContext.Remove(entity);
+			_dbContext.SaveChanges();
+		}
+
 
 
 

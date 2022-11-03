@@ -6,19 +6,12 @@ namespace Database
 {
 	public class Context : DbContext
 	{
-		private readonly string _database;
-		private readonly string _server;
+		private readonly string _connectionString;
 
 		public Context()
 		{
+			_connectionString = "Server=tcp:ne-backend-ws.database.windows.net,1433;Initial Catalog=BackendWorkshop1;Persist Security Info=False;User ID=backendwsadmin;Password=BJ8HNsJLa6LbJTAHbpVs;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
 		}
-
-		public Context(string server, string database)
-		{
-			_server = server;
-			_database = database;
-		}
-
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{
 			modelBuilder.HasDefaultSchema(Constants.schema);
@@ -28,19 +21,12 @@ namespace Database
 
 		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 		{
-			var connectionString = new SqlConnectionStringBuilder
-			{
-				DataSource = _server ?? "temp",
-				InitialCatalog = _database ?? "temp",
-				IntegratedSecurity = true
-			}.ToString();
-
-			optionsBuilder.UseSqlServer(connectionString);
+			optionsBuilder.UseSqlServer(_connectionString);
 			base.OnConfiguring(optionsBuilder);
 		}
 
-		public DbSet<Item> Items { get; set; }
-		public DbSet<CartItem> CartItems { get; set; }
+		public DbSet<Item> Item { get; set; }
+		public DbSet<OrderItem> OrderItems { get; set; }
 
 	}
 

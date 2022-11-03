@@ -1,4 +1,5 @@
-﻿using WebShop.DataTransferObjects;
+﻿using Database.Entities;
+using WebShop.DataTransferObjects;
 using WebShop.Repositories;
 
 namespace WebShop.Services
@@ -9,24 +10,35 @@ namespace WebShop.Services
 
 		public ItemService()
 		{
-			
-		}
-
-		public void CreateItem(Item Item)
-		{
-			_itemRepository.CreateItem(Item);
+			_itemRepository = new ItemRepository();
 		}
 
 
-		public void UpdateItem()
+		public List<ItemDTO> GetItems()
 		{
+			return _itemRepository.GetItems();
+		}
 
+		public ItemDTO GetItem(int id)
+		{
+			return _itemRepository.GetItem(id);
+		}
+
+		public void CreateItem(ItemDTO item)
+		{
+			_itemRepository.CreateItem(item);
 		}
 
 
-		public void DeleteItem()
+		public void UpdateItem(int id, ItemDTO item)
 		{
+			_itemRepository.UpdateItem(id, item);
+		}
 
+
+		public void DeleteItem(int id)
+		{
+			_itemRepository.DeleteItem(id);
 		}
 
 	}

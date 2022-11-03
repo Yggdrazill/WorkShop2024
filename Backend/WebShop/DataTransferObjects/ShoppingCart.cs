@@ -1,8 +1,14 @@
 ﻿namespace WebShop.DataTransferObjects
 {
-	public class ShoppingCart
+	public class ShoppingCartDTO
 	{
-		public int TotalPrice { get; set; }
-		public List<Item> Items { get; set; }
+		public double TotalPrice { get; set; }
+		public List<CartItem> CartItems { get; set; }
+	}
+
+	public class CartItem
+	{
+		public string Name { get; set; }
+		public int Quantity { get; set; }
 	}
 }

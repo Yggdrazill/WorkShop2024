@@ -21,7 +21,7 @@ export default function App(props) {
 
 	const handleEditItem = async (id, cost) => {
 		console.log(cost);
-		const result = await fetch(`https://localhost:7277/WebShopItem/${id}`, {
+		const result = await fetch(`https://localhost:7277/Item/${id}`, {
 			method: 'PUT',
 			headers: { 'Content-Type': 'application/json' },
 			body: cost 
@@ -31,7 +31,7 @@ export default function App(props) {
 	}
 
 	const fetchData = async () => {
-		const result = await fetch('https://localhost:7277/WebShopItem')
+		const result = await fetch('https://localhost:7277/Item')
 			.then(response => response.json())
 			.then(response => setItems(response))
 			.catch(err => global.alert(err));
