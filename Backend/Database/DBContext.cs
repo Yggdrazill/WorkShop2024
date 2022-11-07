@@ -26,7 +26,7 @@ namespace Database
 		}
 
 		public DbSet<Item> Item { get; set; }
-		public DbSet<OrderItem> OrderItems { get; set; }
+		public DbSet<OrderItem> OrderItem { get; set; }
 
 	}
 

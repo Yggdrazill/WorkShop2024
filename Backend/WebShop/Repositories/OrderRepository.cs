@@ -1,6 +1,7 @@
 ﻿using Database;
 using Database.Entities;
 using WebShop.DataTransferObjects;
+using static WebShop.Controllers.CartController;
 
 namespace WebShop.Repositories
 {
@@ -16,7 +17,7 @@ namespace WebShop.Repositories
 
 		public List<OrderItemDTO> GetOrders()
 		{
-			var orders = _dbContext.OrderItems.Select(x =>
+			var orders = _dbContext.OrderItem.Select(x =>
 				new OrderItemDTO
 				{
 					Id = x.Id,
@@ -44,8 +45,10 @@ namespace WebShop.Repositories
 				TotalPrice = orders.Sum(x => x.Item.Cost * x.Quantity),
 				CartItems = orders.Select(x => new CartItem
 				{
+					Id = x.Id,
 					Name = x.Item.Name!,
-					Quantity = x.Quantity
+					Quantity = x.Quantity,
+					Cost = x.Item.Cost
 				}).ToList()
 
 			};
@@ -54,7 +57,7 @@ namespace WebShop.Repositories
 
 		}
 
-		public int AddOrder(OrderItemDTO order)
+		public int AddOrder(ItemData order)
 		{
 			var entity = new OrderItem
 			{
@@ -62,26 +65,33 @@ namespace WebShop.Repositories
 				Quantity = order.Quantity
 			};
 
-			_dbContext.OrderItems.Add(entity);
+			_dbContext.OrderItem.Add(entity);
 			_dbContext.SaveChanges();
 
 			return entity.Id;
 		}
 
 
-		public void UpdateItem(int id, OrderItemDTO order)
+		public void UpdateOrder(int id, ItemData order)
 		{
-			var entity = _dbContext.OrderItems.First(x => x.Id == id);
+			var entity = _dbContext.OrderItem.First(x => x.Id == id);
 
 			entity.Quantity = order.Quantity;
 			_dbContext.SaveChanges();
 		}
 
 
-		public void DeleteItem(int id)
+		public void DeleteOrder(int id)
 		{
-			var entity = _dbContext.OrderItems.First(x => x.Id == id);
-			_dbContext.OrderItems.Remove(entity);
+			var entity = _dbContext.OrderItem.First(x => x.Id == id);
+			_dbContext.OrderItem.Remove(entity);
+			_dbContext.SaveChanges();
+		}
+
+
+		public void ClearShoppingCart()
+		{
+			_dbContext.OrderItem.RemoveRange(_dbContext.OrderItem.ToList());
 			_dbContext.SaveChanges();
 		}
 

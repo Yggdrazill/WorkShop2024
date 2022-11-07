@@ -9,14 +9,20 @@ export default function App(props) {
 	const [items, setItems] = useState([]);
 	const [isAdmin, setAdmin] = useState(false);
 
-	const handleBuy = (name, cost) => {
-		setShoppingCart([...shoppingCart, { name, cost }]);
+	const handleBuy = async (item, quantity) => {
+		const result = await fetch('https://localhost:7277/Cart/order', {
+			method: 'POST',
+			headers: { 'Content-Type': 'application/json' },
+			body: JSON.stringify({ItemId: item.id, Quantity: quantity})
+		}).catch(err => global.alert(err));
+		await fetchCart();
 	}
 
-	const handleRemove = (index) => {
-		const newCart = [...shoppingCart];
-		newCart.splice(index, 1);
-		setShoppingCart(newCart);
+	const handleRemove = async (id) => {
+		const result = await fetch(`https://localhost:7277/Cart/order/${id}`, {
+			method: 'DELETE'
+		}).catch(err => global.alert(err));
+		await fetchCart();
 	}
 
 	const handleEditItem = async (id, cost) => {
@@ -38,11 +44,24 @@ export default function App(props) {
 
 	};
 
+	const fetchCart = async () => {
+		const result = await fetch('https://localhost:7277/Cart')
+			.then(response => response.json())
+			.then(response => setShoppingCart(response))
+			.catch(err => global.alert(err));
+
+	};
+
+	const clearCart = async () => {
+		const result = await fetch('https://localhost:7277/Cart', {
+			method: 'DELETE'
+		}).catch(err => global.alert(err));
+		await fetchCart();
+	};
 
 	useEffect(() => {
-		
-
 		fetchData();
+		fetchCart();
 	}, []);
 
 	const ShoppingApp = () => {
@@ -60,25 +79,26 @@ export default function App(props) {
 									imageId={i.imageId}
 									name={i.name}
 									cost={i.cost}
-									onBuy={handleBuy} // Här kopplar vi onBuy till funktionen handleBuy.
+									onBuy={() => handleBuy(i, 1)}
 								/>
 							</div>
 					)})
 				}
 				<h3>
-					Varukorg
+					Varukorg 
+					<input value="Töm" type="button" onClick={clearCart} />
 				</h3>
 				<p>
 					<b>
-						Totalt: {shoppingCart.reduce((acc, curr) => { acc += curr.cost; return acc; }, 0)}kr
+						Totalt: {shoppingCart?.totalPrice} kr
 					</b>
 				</p>
 				<div>
-					{shoppingCart.map((item, index) => (
+					{shoppingCart?.cartItems?.map((item, index) => (
 						<div key={index}>
 							<p>
 								{item.name} - {item.cost}
-								<span style={{ marginLeft: 10, cursor: 'pointer' }} onClick={() => handleRemove(index)}>X</span>
+								<span style={{ marginLeft: 10, cursor: 'pointer' }} onClick={() => handleRemove(item.id)}>X</span>
 							</p>
 						</div>
 					))}
