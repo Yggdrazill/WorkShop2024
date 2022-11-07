@@ -7,11 +7,6 @@ namespace WebShop.Controllers
 	[Route("[controller]")]
 	public class ShoppingCartController : ControllerBase
 	{
-		private static readonly string[] Summaries = new[]
-		{
-			"Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-		};
-
 		private readonly ILogger<ShoppingCartController> _logger;
 
 		public ShoppingCartController(ILogger<ShoppingCartController> logger)
@@ -20,7 +15,7 @@ namespace WebShop.Controllers
 		}
 
 		[HttpGet]
-		public IEnumerable<ShoppingCart> GetAll()
+		public IEnumerable<OrderItemDTO> GetAll()
 		{
 			return null;
 		}
