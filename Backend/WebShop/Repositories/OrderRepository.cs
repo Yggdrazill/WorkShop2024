@@ -7,7 +7,6 @@ namespace WebShop.Repositories
 {
 	public class OrderRepository
 	{
-
 		private Context _dbContext;
 
 		public OrderRepository()
@@ -17,7 +16,7 @@ namespace WebShop.Repositories
 
 		public List<OrderItemDTO> GetOrders()
 		{
-			var orders = _dbContext.OrderItem.Select(x =>
+			var orders = _dbContext.OrderItems.Select(x =>
 				new OrderItemDTO
 				{
 					Id = x.Id,
@@ -27,7 +26,6 @@ namespace WebShop.Repositories
 						Id = x.ItemId,
 						Name = x.Item.Name,
 						Cost = x.Item.Cost,
-						Currency = x.Item.Currency,
 						ImageId = x.Item.ImageId
 					}
 				}).ToList();
@@ -65,7 +63,7 @@ namespace WebShop.Repositories
 				Quantity = order.Quantity
 			};
 
-			_dbContext.OrderItem.Add(entity);
+			_dbContext.OrderItems.Add(entity);
 			_dbContext.SaveChanges();
 
 			return entity.Id;
@@ -74,7 +72,7 @@ namespace WebShop.Repositories
 
 		public void UpdateOrder(int id, ItemData order)
 		{
-			var entity = _dbContext.OrderItem.First(x => x.Id == id);
+			var entity = _dbContext.OrderItems.First(x => x.Id == id);
 
 			entity.Quantity = order.Quantity;
 			_dbContext.SaveChanges();
@@ -83,15 +81,15 @@ namespace WebShop.Repositories
 
 		public void DeleteOrder(int id)
 		{
-			var entity = _dbContext.OrderItem.First(x => x.Id == id);
-			_dbContext.OrderItem.Remove(entity);
+			var entity = _dbContext.OrderItems.First(x => x.Id == id);
+			_dbContext.OrderItems.Remove(entity);
 			_dbContext.SaveChanges();
 		}
 
 
 		public void ClearShoppingCart()
 		{
-			_dbContext.OrderItem.RemoveRange(_dbContext.OrderItem.ToList());
+			_dbContext.OrderItems.RemoveRange(_dbContext.OrderItems.ToList());
 			_dbContext.SaveChanges();
 		}
 

@@ -16,24 +16,24 @@ namespace WebShop.Repositories
 
 		public List<ItemDTO> GetItems()
 		{
-			return _dbContext.Item.Select(x => new ItemDTO
+			var items = _dbContext.Items.Select(x => new ItemDTO
 			{
 				Id = x.Id,
 				Cost = x.Cost,
-				Currency = x.Currency,
 				Name = x.Name,
 				ImageId = x.ImageId
 			}).ToList();
+
+			return items;
 		}
 
 		public ItemDTO GetItem(int id)
 		{
-			var entity = _dbContext.Item.First(x => x.Id == id);
+			var entity = _dbContext.Items.First(x => x.Id == id);
 			return new ItemDTO
 			{
 				Id = entity.Id,
 				Cost = entity.Cost,
-				Currency = entity.Currency,
 				Name = entity.Name,
 				ImageId = entity.ImageId
 			};
@@ -45,18 +45,17 @@ namespace WebShop.Repositories
 				Id = dto.Id,
 				Name = dto.Name,
 				Cost = dto.Cost,
-				Currency = dto.Currency,
 				ImageId = dto.ImageId,
 			};
 
-			_dbContext.Item.Add(entity);
+			_dbContext.Items.Add(entity);
 			_dbContext.SaveChanges();
 		}
 
 
 		public void UpdateItem(int id, ItemDTO dto)
 		{
-			var entity = _dbContext.Item.FirstOrDefault(x => x.Id == id);
+			var entity = _dbContext.Items.FirstOrDefault(x => x.Id == id);
 
 			if (entity == null)
 			{
@@ -66,7 +65,6 @@ namespace WebShop.Repositories
 
 			entity.Name = dto.Name;
 			entity.Cost = dto.Cost;
-			entity.Currency = dto.Currency;
 			entity.ImageId = dto.ImageId;
 
 			_dbContext.SaveChanges();
@@ -75,7 +73,7 @@ namespace WebShop.Repositories
 
 		public void DeleteItem(int id)
 		{
-			var entity = _dbContext.Item.FirstOrDefault(x => x.Id == id);
+			var entity = _dbContext.Items.FirstOrDefault(x => x.Id == id);
 			_dbContext.Remove(entity);
 			_dbContext.SaveChanges();
 		}

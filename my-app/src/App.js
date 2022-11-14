@@ -5,24 +5,25 @@ import './App.css';
 
 export default function App(props) {
 	const content = useRef();
-	const [shoppingCart, setShoppingCart] = useState([]);
+	const [totalPrice, setTotalPrice] = useState(0);
+	const [orders, setOrders] = useState([]);
 	const [items, setItems] = useState([]);
 	const [isAdmin, setAdmin] = useState(false);
 
 	const handleBuy = async (item, quantity) => {
-		const result = await fetch('https://localhost:7277/Cart/order', {
+		const result = await fetch('https://localhost:7277/order', {
 			method: 'POST',
 			headers: { 'Content-Type': 'application/json' },
 			body: JSON.stringify({ItemId: item.id, Quantity: quantity})
-		}).catch(err => global.alert(err));
-		await fetchCart();
+		}).catch(err => global.alert(`Could not fetch from endpoint POST "https://localhost:7277/order" make sure it's implemented. \n Error: ${err}`));
+		await fetchOrders();
 	}
 
 	const handleRemove = async (id) => {
-		const result = await fetch(`https://localhost:7277/Cart/order/${id}`, {
+		const result = await fetch(`https://localhost:7277/Order/${id}`, {
 			method: 'DELETE'
-		}).catch(err => global.alert(err));
-		await fetchCart();
+		}).catch(err => global.alert(`Could not fetch from endpoint DELETE "https://localhost:7277/order/${id}" make sure it's implemented. \n Error: ${err}`));
+		await fetchOrders();
 	}
 
 	const handleEditItem = async (id, cost) => {
@@ -31,37 +32,45 @@ export default function App(props) {
 			method: 'PUT',
 			headers: { 'Content-Type': 'application/json' },
 			body: cost 
-		}).catch(err => global.alert(err));
+		}).catch(err => global.alert(`Could not fetch from endpoint PUT "https://localhost:7277/Item/${id}" make sure it's implemented. \n Error: ${err}`));
 
-		await fetchData();
+		await fetchItems();
 	}
 
-	const fetchData = async () => {
+	const fetchItems = async () => {
 		const result = await fetch('https://localhost:7277/Item')
 			.then(response => response.json())
 			.then(response => setItems(response))
-			.catch(err => global.alert(err));
+			.catch(err => global.alert(`Could not fetch from endpoint GET "https://localhost:7277/Item" make sure it's implemented. \n Error: ${err}`));
 
 	};
 
-	const fetchCart = async () => {
+	const fetchOrders = async () => {
+		const result = await fetch('https://localhost:7277/Order')
+			.then(response => response.json())
+			.then(response => setOrders(response))
+			.catch(err => global.alert(`Could not fetch from endpoint GET "https://localhost:7277/Order" make sure it's implemented. \n Error: ${err}`));
+
+	};
+
+	const fetchTotalPrice = async () => {
 		const result = await fetch('https://localhost:7277/Cart')
 			.then(response => response.json())
-			.then(response => setShoppingCart(response))
-			.catch(err => global.alert(err));
+			.then(response => setTotalPrice(response))
+			.catch(err => global.alert(`Could not fetch from endpoint GET "https://localhost:7277/Cart" make sure it's implemented. \n Error: ${err}`));
 
 	};
 
 	const clearCart = async () => {
-		const result = await fetch('https://localhost:7277/Cart', {
+		const result = await fetch('https://localhost:7277/Order', {
 			method: 'DELETE'
 		}).catch(err => global.alert(err));
-		await fetchCart();
+		await fetchOrders();
 	};
 
 	useEffect(() => {
-		fetchData();
-		fetchCart();
+		fetchItems();
+		fetchOrders();
 	}, []);
 
 	const ShoppingApp = () => {
@@ -90,15 +99,15 @@ export default function App(props) {
 				</h3>
 				<p>
 					<b>
-						Totalt: {shoppingCart?.totalPrice} kr
+						Totalt: {totalPrice} kr
 					</b>
 				</p>
 				<div>
-					{shoppingCart?.cartItems?.map((item, index) => (
+					{orders?.map((order, index) => (
 						<div key={index}>
 							<p>
-								{item.name} - {item.cost}
-								<span style={{ marginLeft: 10, cursor: 'pointer' }} onClick={() => handleRemove(item.id)}>X</span>
+								{order.item.name} x {order.quantity} - {order.item.cost * order.quantity}
+								<span style={{ marginLeft: 10, cursor: 'pointer' }} onClick={() => handleRemove(order.id)}>X</span>
 							</p>
 						</div>
 					))}

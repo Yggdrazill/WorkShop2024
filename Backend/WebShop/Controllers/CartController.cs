@@ -29,33 +29,6 @@ namespace WebShop.Controllers
 			_orderService.ClearShoppingCart();
 		}
 
-		[HttpGet]
-		[Route("order")]
-		public List<OrderItemDTO> GetOrders()
-		{
-			return _orderService.GetOrders();
-		}
-
-		[HttpPost]
-		[Route("order")]
-		public void AddOrder(ItemData order)
-		{
-			_orderService.AddOrder(order);
-		}
-
-		[HttpPut]
-		[Route("order/{id}")]
-		public void UpdateOrder(int id, ItemData order)
-		{
-			_orderService.UpdateOrder(id, order);
-		}
-
-		[HttpDelete]
-		[Route("order/{id}")]
-		public void DeleteOrder(int id)
-		{
-			_orderService.DeleteOrder(id);
-		}
 
 		public class ItemData
 		{
