@@ -43,6 +43,48 @@
 	top: 20px;
 }
 
+.itemListWrapper {
+	display: flex;
+	justify-content: center;
+	align-items:center;
+}
+
+.itemList {
+	position: relative;
+    border: 1px solid #ccc;
+	display: flex;
+	overflow: scroll;
+	overflow-y: auto;
+	overflow-x: auto;
+	flex-wrap: wrap;
+	max-width: 655px;
+	min-width: 230px;
+	height: 500px;
+}
+
+.orderListWrapper {
+	display: flex;
+	justify-content: center;
+	align-items:center;
+}
+
+.orderList {
+	position: relative;
+    border: 1px solid #ccc;
+	overflow: scroll;
+	overflow-y: auto;
+	overflow-x: auto;
+	flex-wrap: wrap;
+	height: 300px;
+	max-width: 655px;
+	min-width: 230px;
+}
+
+.order {
+	padding: 0px 5px 0px;
+	text-align: left;
+}
+
 @keyframes App-logo-spin {
 	from {
 		transform: rotate(0deg);
