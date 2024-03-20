@@ -5,4 +5,3 @@
 		public const string schema = "dbo";
 	}
 }
-s
