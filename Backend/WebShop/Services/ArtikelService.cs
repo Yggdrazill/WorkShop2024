@@ -1,5 +1,4 @@
-﻿using Database.Entities;
-using WebShop.DataTransferObjects;
+﻿using WebShop.DataTransferObjects;
 using WebShop.Repositories;
 
 namespace WebShop.Services
@@ -13,5 +12,10 @@ namespace WebShop.Services
 			_artikelRepository = new ArtikelRepository();
 		}
 
+
+		public List<ArtikelDTO> GetArtiklar()
+		{
+			return _artikelRepository.GetArtiklar();
+		}
 	}
 }
