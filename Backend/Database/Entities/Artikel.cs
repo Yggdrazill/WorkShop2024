@@ -1,4 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Database.Entities
 {
@@ -8,7 +8,7 @@ namespace Database.Entities
 		public int Id { get; set; }
 		public string? Namn { get; set; }
 
-		public double Pris { get; set; }
+		public decimal Pris { get; set; }
 		public bool Borttagen { get; set; }
 	}
 }

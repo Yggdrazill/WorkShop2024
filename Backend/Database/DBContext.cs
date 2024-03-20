@@ -1,4 +1,4 @@
-﻿using Database.Entities;
+using Database.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace Database
@@ -28,7 +28,7 @@ namespace Database
 			base.OnConfiguring(optionsBuilder);
 		}
 
-		public DbSet<Artikel> Artikelar { get; set; }
+		public DbSet<Artikel> Artiklar { get; set; }
 		public DbSet<Kund> Kunder { get; set; }
 
 	}
