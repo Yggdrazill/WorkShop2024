@@ -1,6 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System.Data.SqlClient;
-using Database.Entities;
+﻿using Database.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace Database
 {
@@ -25,8 +24,8 @@ namespace Database
 			base.OnConfiguring(optionsBuilder);
 		}
 
-		public DbSet<Item> Items { get; set; }
-		public DbSet<OrderItem> OrderItems { get; set; }
+		public DbSet<Artikel> Artikelar { get; set; }
+		public DbSet<Kund> Kunder { get; set; }
 
 	}
 

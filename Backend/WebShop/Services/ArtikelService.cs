@@ -6,11 +6,11 @@ namespace WebShop.Services
 {
 	public class ItemService
 	{
-		private readonly ItemRepository _itemRepository;
+		private readonly ArtikelRepository _itemRepository;
 
 		public ItemService()
 		{
-			_itemRepository = new ItemRepository();
+			_itemRepository = new ArtikelRepository();
 		}
 
 	}

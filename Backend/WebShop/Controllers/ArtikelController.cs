@@ -1,6 +1,5 @@
 ﻿namespace WebShop.Controllers
 {
-	using global::WebShop.DataTransferObjects;
 	using global::WebShop.Services;
 	using Microsoft.AspNetCore.Mvc;
 
@@ -8,15 +7,16 @@
 	{
 		[ApiController]
 		[Route("[controller]")]
-		public class ItemController : ControllerBase
+		public class ArtikelController : ControllerBase
 		{
 
-			private ItemService _itemService;
+			private ArtikelService _artikelService;
 
-			public ItemController()
+			public ArtikelController()
 			{
-				_itemService = new ItemService();
+				_artikelService = new ArtikelService();
 			}
+
 
 
 		}

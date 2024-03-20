@@ -1,6 +1,6 @@
 ﻿namespace WebShop.DataTransferObjects
 {
-	public class ItemDTO
+	public class ArtikelDTO
 	{
 	}
 }

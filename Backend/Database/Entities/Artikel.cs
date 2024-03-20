@@ -2,12 +2,13 @@
 
 namespace Database.Entities
 {
-	[Table("Item")]
-	public class Item
+	[Table("Artikel")]
+	public class Artikel
 	{
 		public int Id { get; set; }
-		public double Cost { get; set; }
 		public string? Name { get; set; }
-		public int ImageId { get; set; }
+
+		public double Pris { get; set; }
+		public bool Borttagen { get; set; }
 	}
 }

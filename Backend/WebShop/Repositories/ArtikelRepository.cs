@@ -4,12 +4,12 @@ using WebShop.DataTransferObjects;
 
 namespace WebShop.Repositories
 {
-	public class ItemRepository
+	public class ArtikelRepository
 	{
 
 		private Context _dbContext;
 
-		public ItemRepository()
+		public ArtikelRepository()
 		{
 			_dbContext = new Context();
 		}
