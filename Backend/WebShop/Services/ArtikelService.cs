@@ -4,13 +4,13 @@ using WebShop.Repositories;
 
 namespace WebShop.Services
 {
-	public class ItemService
+	public class ArtikelService
 	{
-		private readonly ArtikelRepository _itemRepository;
+		private readonly ArtikelRepository _artikelRepository;
 
-		public ItemService()
+		public ArtikelService()
 		{
-			_itemRepository = new ArtikelRepository();
+			_artikelRepository = new ArtikelRepository();
 		}
 
 	}

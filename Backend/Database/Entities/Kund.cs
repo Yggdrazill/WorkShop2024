@@ -6,7 +6,7 @@ namespace Database.Entities
 	public class Kund
 	{
 		public int Id { get; set; }
-		public string Name { get; set; }
+		public string Namn { get; set; }
 		public string Mejl { get; set; }
 		public string Adress { get; set; }
 

@@ -17,12 +17,6 @@
 				_artikelService = new ArtikelService();
 			}
 
-
-
 		}
-
-
 	}
-
-
 }
