@@ -1,4 +1,4 @@
-﻿using Database.Entities;
+using Database.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace Database
@@ -9,12 +9,11 @@ namespace Database
 
 		public Context()
 		{
-			var server = "localhost\\MSSQLSERVER02";
-			var database = "BackendWS";
+			var server = "";
+			var database = "";
 			var user = "";
 			var password = "";
-			//_connectionString = $"Server={server};Initial Catalog={database};Persist Security Info=False;User ID={user};Password={password};MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
-			_connectionString = $"Server={server};Initial Catalog={database};Persist Security Info=False;Integrated Security=True;MultipleActiveResultSets=False;Encrypt=False;TrustServerCertificate=False;Connection Timeout=30;";
+			_connectionString = $"Server={server};Initial Catalog={database};Persist Security Info=False;User ID={user};Password={password};MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
 		}
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{

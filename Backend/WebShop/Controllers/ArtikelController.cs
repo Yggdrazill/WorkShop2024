@@ -1,6 +1,5 @@
 ﻿namespace WebShop.Controllers
 {
-	using global::WebShop.DataTransferObjects;
 	using global::WebShop.Services;
 	using Microsoft.AspNetCore.Mvc;
 
@@ -17,15 +16,6 @@
 			{
 				_artikelService = new ArtikelService();
 			}
-
-
-			[HttpGet]
-			[Route("")]
-			public IList<ArtikelDTO> GetArtiklar()
-			{
-				return _artikelService.GetArtiklar();
-			}
-
 
 		}
 	}
