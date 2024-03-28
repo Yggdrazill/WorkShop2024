@@ -9,10 +9,10 @@ namespace Database
 
 		public Context()
 		{
-			var server = "";
-			var database = "";
-			var user = "";
-			var password = "";
+			var server = "studentws.database.windows.net";
+			var database = "backendws";
+			var user = "studentuser";
+			var password = "******";
 			_connectionString = $"Server={server};Initial Catalog={database};Persist Security Info=False;User ID={user};Password={password};MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
 		}
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
