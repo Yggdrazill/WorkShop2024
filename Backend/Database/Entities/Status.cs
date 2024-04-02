@@ -3,15 +3,11 @@ using System.Collections.Generic;
 
 namespace Database.Entities;
 
-public partial class Kund
+public partial class Status
 {
     public int Id { get; set; }
 
-    public string Namn { get; set; } = null!;
-
-    public string? Mejl { get; set; }
-
-    public string? Adress { get; set; }
+    public string Typ { get; set; } = null!;
 
     public virtual ICollection<Order> Orders { get; set; } = new List<Order>();
 }
