@@ -12,7 +12,7 @@ namespace Database
             var server = "studentws.database.windows.net";
 			var database = "backendws";
 			var user = "studentuser";
-            var password = "******";
+            var password = "studentAW2024";
 
             _connectionString = $"Server={server};Initial Catalog={database};Persist Security Info=False;User ID={user};Password={password};MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
 		}
